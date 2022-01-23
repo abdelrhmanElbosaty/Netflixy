@@ -17,7 +17,7 @@ class UpcommingCell: UITableViewCell {
     
     private let PosterImg: UIImageView = {
         let img = UIImageView()
-        img.contentMode = .scaleAspectFit
+        img.contentMode = .scaleAspectFill
         img.translatesAutoresizingMaskIntoConstraints = false
         img.clipsToBounds = true
         img.image = UIImage(named: "heroImage")
@@ -27,7 +27,7 @@ class UpcommingCell: UITableViewCell {
     private let playButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "play.circle",withConfiguration: UIImage.SymbolConfiguration(pointSize: 25)), for: .normal)
-        btn.tintColor = .white
+        btn.tintColor = .label
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
@@ -37,7 +37,7 @@ class UpcommingCell: UITableViewCell {
         lbl.adjustsFontSizeToFitWidth = true
         lbl.numberOfLines = 0
         lbl.font = .systemFont(ofSize: 15, weight: .semibold)
-        lbl.textColor = .white
+        lbl.textColor = .label
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }()

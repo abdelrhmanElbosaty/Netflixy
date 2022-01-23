@@ -31,6 +31,8 @@
 		5FAEAD5427850D7200D06A4A /* HomeCVCellInTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAEAD5327850D7100D06A4A /* HomeCVCellInTVCell.swift */; };
 		5FAEAD582785104700D06A4A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAEAD572785104700D06A4A /* Constant.swift */; };
 		5FAEAD5A278525DB00D06A4A /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAEAD59278525DB00D06A4A /* MainHeaderView.swift */; };
+		5FDDC97B279D8940007608EF /* MovieEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDC979279D8940007608EF /* MovieEntity.xcdatamodeld */; };
+		5FDDC97D279DBB1A007608EF /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDDC97C279DBB1A007608EF /* HelperFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		5FAEAD5327850D7100D06A4A /* HomeCVCellInTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCVCellInTVCell.swift; sourceTree = "<group>"; };
 		5FAEAD572785104700D06A4A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		5FAEAD59278525DB00D06A4A /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
+		5FDDC97A279D8940007608EF /* MovieEntity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MovieEntity.xcdatamodel; sourceTree = "<group>"; };
+		5FDDC97C279DBB1A007608EF /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,13 +93,6 @@
 				5F3C1852278A431C00F59851 /* UpcommingCell.swift */,
 			);
 			path = UpComming;
-			sourceTree = "<group>";
-		};
-		5F4E74EF278B9CEF000F62BE /* Search */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Search;
 			sourceTree = "<group>";
 		};
 		5F4E74F0278B9D10000F62BE /* Search */ = {
@@ -143,6 +140,7 @@
 				5FAEAD5227850D1A00D06A4A /* ViewModel */,
 				5FAEAD452784F59500D06A4A /* Controller */,
 				5FAEAD382784F53A00D06A4A /* Assets.xcassets */,
+				5FDDC979279D8940007608EF /* MovieEntity.xcdatamodeld */,
 				5FAEAD3D2784F53A00D06A4A /* Info.plist */,
 			);
 			path = Netflixy;
@@ -163,7 +161,6 @@
 				5FAEAD472784F5BB00D06A4A /* Storyboard */,
 				5F3C1850278A42E600F59851 /* Home */,
 				5F3C1851278A42EC00F59851 /* UpComming */,
-				5F4E74EF278B9CEF000F62BE /* Search */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +225,7 @@
 				5FAEAD562785102C00D06A4A /* Constant */,
 				5F6EF23D2786E4A70039ED89 /* String+Extenssion.swift */,
 				5F4E74EB278B9B4A000F62BE /* TableView+Extenssion.swift */,
+				5FDDC97C279DBB1A007608EF /* HelperFunctions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -323,6 +321,8 @@
 				5FAEAD5A278525DB00D06A4A /* MainHeaderView.swift in Sources */,
 				5FAEAD342784F53800D06A4A /* MainTabBarVC.swift in Sources */,
 				5F0E2FD8278E6B4D0030DC23 /* TitlePreviewViewModel.swift in Sources */,
+				5FDDC97D279DBB1A007608EF /* HelperFunctions.swift in Sources */,
+				5FDDC97B279D8940007608EF /* MovieEntity.xcdatamodeld in Sources */,
 				5F4E74EE278B9CBA000F62BE /* SearchResultVC.swift in Sources */,
 				5F6EF24D2787CC790039ED89 /* HomeCVCell.swift in Sources */,
 				5FAEAD4D2784F84100D06A4A /* SearchVC.swift in Sources */,
@@ -565,6 +565,19 @@
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5FDDC979279D8940007608EF /* MovieEntity.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5FDDC97A279D8940007608EF /* MovieEntity.xcdatamodel */,
+			);
+			currentVersion = 5FDDC97A279D8940007608EF /* MovieEntity.xcdatamodel */;
+			path = MovieEntity.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5FAEAD242784F53800D06A4A /* Project object */;
 }

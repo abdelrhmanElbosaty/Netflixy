@@ -7,10 +7,17 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
+protocol mainHeaderViewDelegate{
+    func mainHeaderViewDidTapCell(_ cell: MainHeaderView, model: TitlePreviewViewModel)
+}
 class MainHeaderView: UIView {
     //MARK: - Variables
 
+    var container: UIViewController?
+    var title: Title?
+    var delegate: mainHeaderViewDelegate?
     private let headerView: UIImageView = {
        let img = UIImageView(image: UIImage(named: "heroImage"))
         img.contentMode = .scaleAspectFill
@@ -32,6 +39,7 @@ class MainHeaderView: UIView {
     private let downloadButton: UIButton = {
         let downloadButton = UIButton()
         downloadButton.setTitle("Download", for: .normal)
+     //   downloadButton.setTitleColor(.label, for: .normal)
         downloadButton.layer.cornerRadius = 10
         downloadButton.layer.borderColor = UIColor.white.cgColor.copy(alpha: 0.5)
         downloadButton.layer.borderWidth = 1
@@ -47,6 +55,8 @@ class MainHeaderView: UIView {
         addSubview(playButton)
         addSubview(downloadButton)
         applayConstraint()
+//        playButton.addTarget(self, action: #selector(playBttnTapped), for: .touchUpInside)
+//        downloadButton.addTarget(self, action: #selector(downloadBttnTapped), for: .touchUpInside)
     }
     
     override func layoutSubviews() {
@@ -89,8 +99,19 @@ class MainHeaderView: UIView {
 //                            ,placeholder: #imageLiteral(resourceName: "heroImage"),
 //                            options: [.transition(.fade(0.8))]
         )
-        
     }
+//    @objc func playBttnTapped(){
+//        APIFunctions.getFromYoutube(title: title?.original_name ?? title?.original_title ?? "") { response in
+//            DispatchQueue.main.async {
+//                self.delegate?.mainHeaderViewDidTapCell(self, model: TitlePreviewViewModel(title: self.title?.original_title ?? self.title?.original_name ?? "" , youtubeView: (response.id)!, titleOverview: self.title?.overview ?? ""))
+//            }
+//        }
+//    }
+//    @objc func downloadBttnTapped(){
+//        HelperFunctions.insertToEntity(titles: title!)
+//    }
+    
+ 
     required init?(coder: NSCoder) {
         fatalError()
     }

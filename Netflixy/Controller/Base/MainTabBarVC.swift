@@ -22,7 +22,7 @@ class MainTabBarVC: UITabBarController {
         
         let searchVC = UINavigationController(rootViewController: SearchVC())
         searchVC.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        searchVC.title = "Top search"
+        searchVC.title = "search"
         
         let upcomingVC = UINavigationController(rootViewController: UpcomingVC())
         upcomingVC.tabBarItem.image = UIImage(systemName: "play.circle")

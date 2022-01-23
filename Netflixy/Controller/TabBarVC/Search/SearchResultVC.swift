@@ -45,7 +45,9 @@ class SearchResultVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-    
+    private func downloadTapped(indexPath: IndexPath){
+        HelperFunctions.insertToEntity(indexPath: indexPath, titles: searchResults)
+    }
     
 }
 extension SearchResultVC: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -60,12 +62,24 @@ extension SearchResultVC: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
+        collectionView.isUserInteractionEnabled = false
         guard let title = searchResults[indexPath.row].original_title ?? searchResults[indexPath.row].original_name else {return}
         
         APIFunctions.getFromYoutube(title: title) { response in
-            self.delegate?.collectionViewTableViewCellDidTapCell(TitlePreviewViewModel(title: title, youtubeView: (response.items![0].id)!, titleOverview: self.searchResults[indexPath.row].overview ?? ""))
+            self.delegate?.collectionViewTableViewCellDidTapCell(TitlePreviewViewModel(title: title, youtubeView: (response.id!) , titleOverview: self.searchResults[indexPath.row].overview ?? ""))
+            DispatchQueue.main.async {
+                collectionView.isUserInteractionEnabled = true
+            }
         }
+    }
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let action = UIAction(title: "download", image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.downloadTapped(indexPath: indexPath)
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [action])
+        }
+        return config
     }
     
 }

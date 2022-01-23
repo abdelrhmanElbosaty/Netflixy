@@ -48,6 +48,7 @@ class HomeVC: UIViewController {
         view.addSubview(tableFeedView)
         
         header = MainHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: Constans.ScreenHeight / 1.6))
+        header?.delegate = self
         tableFeedView.tableHeaderView = header
     }
     //Nav bar init
@@ -57,21 +58,31 @@ class HomeVC: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: img, style: .plain, target: self, action: nil)
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "person"), style: .plain, target: self, action: #selector(login)),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .plain, target: self, action: nil)
         ]
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .label
     }
-    
+    // To get header Random Movie
     private func getRandomTrendingMovie(){
         
         APIFunctions.getTrendingMovie { response in
             self.randomTrendingMovie = response.results.randomElement()
             DispatchQueue.main.async {
                 self.header?.configureCellPosterImg(posterPath: self.randomTrendingMovie?.poster_path ?? "")
+                self.header?.title = self.randomTrendingMovie
             }
         }
     }
+    
+    @objc func login(){
+        let alert = UIAlertController(title: "Want to Login ?? ", message: "Send OLYMBIA invitation and i will complete the code ", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
 
 
@@ -138,14 +149,24 @@ extension HomeVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else{return}
         header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        header.textLabel?.textColor = .white
+        header.textLabel?.textColor = .label
         header.textLabel?.text? = (header.textLabel?.text?.capitalizeFirstDigit())!
     }
     
 }
-
+// Delegate For cell Selection
 extension HomeVC: homeCVCellInTVCellDelegate {
     func collectionViewTableViewCellDidTapCell(_ cell: HomeCVCellInTVCell, model : TitlePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = PreviewMoviesVC()
+            vc.configure(model: model)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+// Delegate For header Selection
+extension HomeVC: mainHeaderViewDelegate{
+    func mainHeaderViewDidTapCell(_ cell: MainHeaderView, model: TitlePreviewViewModel) {
         DispatchQueue.main.async { [weak self] in
             let vc = PreviewMoviesVC()
             vc.configure(model: model)

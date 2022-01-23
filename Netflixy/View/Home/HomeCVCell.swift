@@ -17,7 +17,7 @@ class HomeCVCell: UICollectionViewCell {
     
     private let posterImg:UIImageView = {
         let img = UIImageView()
-        img.contentMode = .scaleAspectFit
+        img.contentMode = .scaleAspectFill
         return img
     }()
     
@@ -38,7 +38,7 @@ class HomeCVCell: UICollectionViewCell {
     func configureCellPosterImg(posterPath: String){
         guard let imageURL = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") else {return}
         posterImg.kf.indicatorType = .activity
-        
+        posterImg.contentMode = .scaleAspectFill
         posterImg.kf.setImage(with: imageURL
                             ,placeholder: #imageLiteral(resourceName: "noImg")
 //                           , options: [.transition(.fade(0.8))]

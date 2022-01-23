@@ -21,6 +21,7 @@ class PreviewMoviesVC: UIViewController {
     let nameLabel: UILabel = {
         let lbl = UILabel()
          lbl.font = .systemFont(ofSize: 20, weight: .bold)
+        lbl.numberOfLines = 0
          lbl.text = "dfgfgfdgf"
          lbl.translatesAutoresizingMaskIntoConstraints = false
          return lbl
@@ -39,7 +40,7 @@ class PreviewMoviesVC: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .label
         view.addSubview(webKit)
         view.addSubview(nameLabel)
         view.addSubview(overViewLabel)

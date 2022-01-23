@@ -52,8 +52,12 @@ class UpcomingVC: UIViewController {
             }
         }
     }
+    private func downloadTapped(indexPath: IndexPath){
+        HelperFunctions.insertToEntity(indexPath: indexPath, titles: upcommingMovie)
+    }
 }
 
+//MARK: - TableView
 extension UpcomingVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return upcommingMovie.count
@@ -71,17 +75,27 @@ extension UpcomingVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        tableView.isUserInteractionEnabled = false
         guard let title = upcommingMovie[indexPath.row].original_title ?? upcommingMovie[indexPath.row].original_name else {return}
         
         APIFunctions.getFromYoutube(title: title) { response in
             DispatchQueue.main.async {
                 let vc = PreviewMoviesVC()
-                vc.configure(model: TitlePreviewViewModel(title: title, youtubeView: (response.items![0].id)!, titleOverview: self.upcommingMovie[indexPath.row].overview ?? ""))
+                vc.configure(model: TitlePreviewViewModel(title: title, youtubeView: (response.id)!, titleOverview: self.upcommingMovie[indexPath.row].overview ?? ""))
                 self.navigationController?.pushViewController(vc, animated: true)
+                tableView.isUserInteractionEnabled = true
             }
         }
-        
     }
-    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let action = UIAction(title: "download", image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.downloadTapped(indexPath: indexPath)
+            }
+            return UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [action])
+        }
+        return config
+    }
 }
+
+

@@ -112,14 +112,16 @@ class APIFunctions{
     
     
     //###Get From Youtube###
-    class func getFromYoutube(title: String, complition: @escaping ( _ response: YoutubeResponse ) -> Void ){
+    class func getFromYoutube(title: String , complition: @escaping ( _ response: Item ) -> Void ){
+        let title = title + " trailer"
         guard let query = title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
         let base_URL = "?q=\(query)&key="
         let finalUrl = Constans.YOUTUBE_URL + base_URL + Constans.YOUTUBE_API_KEY
         APIManger.Get(strURL: finalUrl, parameters: nil, headers: nil) { (status, response:YoutubeResponse?) in
             switch status {
             case .succ:
-                complition(response!)
+                print(finalUrl)
+                complition((response?.items![0])!)
             case .fail:
                 print("cant get from youtube")
             }
